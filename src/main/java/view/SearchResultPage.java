@@ -109,13 +109,13 @@ public class SearchResultPage extends Stage{
         resultPane.setPrefWidth(616.0);
 
         resultLabelBox = new HBox();
-        resultLabelBox.setSpacing(70);
+        resultLabelBox.setSpacing(50);
         resultLabelBox.setLayoutX(47);
         resultLabelBox.setLayoutY(140);
         Label id = new Label("Recipe Id");
         id.setPrefSize(80, 20);
         Label name = new Label("Recipe Name");
-        name.setPrefSize(80, 20);
+        name.setPrefSize(200, 20);
         Label number = new Label("Serve Number");
         number.setPrefSize(90, 20);
         Label category = new Label("Category");

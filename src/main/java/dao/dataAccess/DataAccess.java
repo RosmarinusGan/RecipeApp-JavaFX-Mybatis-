@@ -107,8 +107,8 @@ public class DataAccess implements DataMethod{
         try {
             InputStream inputStream = Resources.getResourceAsStream(resource);
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            //SqlSession sqlSession = sqlSessionFactory.openSession(true);
-            SqlSession sqlSession = sqlSessionFactory.openSession(false);
+            SqlSession sqlSession = sqlSessionFactory.openSession(true);
+            //SqlSession sqlSession = sqlSessionFactory.openSession(false);
 
             recipeMapper = sqlSession.getMapper(RecipeMapper.class);
             userMapper = sqlSession.getMapper(UserMapper.class);

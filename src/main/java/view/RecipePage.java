@@ -16,12 +16,12 @@ import model.Model;
 
 public class RecipePage extends Stage{
     public Button editRecipeButton, deleteRecipeButton;
-    public TextField recipeNameTextField, cookingTimeTextField, prepareTimeTextField, serveNumberTextField, categoryDisplayField;
+    public TextField recipeNameTextField, cookingTimeTextField, prepareTimeTextField, serveNumberTextField, categoryDisplayField, ownerTextField;
     public TableView<IngredientPOJO> tableView;
     public ImageView recipePicture;
     public TextArea InstructionArea;
     private Tab basicInfoTab, cookingInstructionTab;
-    private Label recipeNameLabel, cookingTimeLabel, prepareTimeLabel, serveNumberLabel, categoryLabel;
+    private Label recipeNameLabel, cookingTimeLabel, prepareTimeLabel, serveNumberLabel, categoryLabel, ownerLabel;
     private final Model model;
     private final RecipePageController controller;
 
@@ -143,11 +143,12 @@ public class RecipePage extends Stage{
         displayPrepareTime();
         displayServeNumber();
         displayCategory();
+        displayOwner();
         setEditAndDeleteButton();
 
         basicInfoContent.getChildren().addAll(pane, tableView, recipeNameTextField, recipeNameLabel,
                 cookingTimeTextField, prepareTimeTextField, cookingTimeLabel, serveNumberLabel,
-                serveNumberTextField, categoryLabel, categoryDisplayField, prepareTimeLabel, editRecipeButton, deleteRecipeButton);
+                serveNumberTextField, categoryLabel, categoryDisplayField, prepareTimeLabel, editRecipeButton, deleteRecipeButton, ownerLabel, ownerTextField);
 
         basicInfoTab.setContent(basicInfoContent);
     }
@@ -238,6 +239,21 @@ public class RecipePage extends Stage{
         recipeNameLabel.setLayoutX(64);
         recipeNameLabel.setLayoutY(20);
         recipeNameLabel.setFont(Font.font("System Bold", 27));
+    }
+
+    private void displayOwner(){
+        ownerTextField = new TextField();
+        ownerTextField.setEditable(false);
+        ownerTextField.setMouseTransparent(true);
+        ownerTextField.setPrefSize(120, 30);
+        ownerTextField.setLayoutX(100);
+        ownerTextField.setLayoutY(420);
+
+        ownerLabel = new Label("Owner :");
+        ownerLabel.setLayoutX(41);
+        ownerLabel.setLayoutY(425);
+        ownerLabel.setFont(Font.font("System Bold  Italic", 15));
+
     }
 }
 

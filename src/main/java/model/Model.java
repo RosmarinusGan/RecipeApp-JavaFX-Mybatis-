@@ -48,6 +48,7 @@ public final class Model implements ModelMethod {
         page.serveNumberTextField.setText(String.valueOf(currentOperateRecipe.getRecommendServeNumber()));
         page.InstructionArea.setText(currentOperateRecipe.getInstruction());
         page.categoryDisplayField.setText(currentOperateRecipe.getRecipeCategory());
+        page.ownerTextField.setText(dataAccess.getUser(currentOperateRecipe.getOwnerId()).get(0).getUserName());
         page.recipePicture.setImage(new Image("file:" + defaultImagePath + "_" + currentOperateRecipe.getImagePath()));
         page.editRecipeButton.setVisible(currentOperateRecipe.getOwnerId() == currentUser.getUserId()); //设置edit按钮对非owner不可见
         page.deleteRecipeButton.setVisible(currentOperateRecipe.getOwnerId() == currentUser.getUserId()); //设置delete按钮对非owner不可见
@@ -181,11 +182,11 @@ public final class Model implements ModelMethod {
             imageView.setFitHeight(150);
             imageView.setFitWidth(150);
             Label recipeId = new Label(String.valueOf(list.get(i).getRecipeId()));
-            recipeId.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px");
-            recipeId.setPrefSize(60, 30);
+            recipeId.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-alignment: center");
+            recipeId.setPrefSize(70, 30);
             Label recipeName = new Label(list.get(i).getRecipeName());
-            recipeName.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px");
-            recipeName.setPrefSize(60, 30);
+            recipeName.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; ; -fx-text-alignment: center");
+            recipeName.setPrefSize(70, 30);
             box.getChildren().addAll(imageView, recipeId, recipeName);
             box.setOnMouseEntered(e -> box.setStyle("-fx-background-color: rgba(238,255,0,0.62)"));
             box.setOnMouseExited(e -> box.setStyle("-fx-background-color: rgba(255,255,255,0)"));
@@ -256,15 +257,24 @@ public final class Model implements ModelMethod {
         box.getChildren().clear();
         for (RecipePOJO recipePOJO : recipeList) {
             HBox tempBox = new HBox();
-            tempBox.setSpacing(70);
+            tempBox.setSpacing(50);
+
             Label recipeId = new Label(String.valueOf(recipePOJO.getRecipeId()));
             recipeId.setPrefSize(80, 40);
+            recipeId.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-fill: rgb(0,0,0)");
+
             Label recipeName = new Label(String.valueOf(recipePOJO.getRecipeName()));
-            recipeName.setPrefSize(80, 40);
+            recipeName.setPrefSize(200, 40);
+            recipeName.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-fill: rgba(255,0,166,0.68)");
+
             Label serveNumber = new Label(String.valueOf(recipePOJO.getRecommendServeNumber()));
             serveNumber.setPrefSize(80, 40);
+            serveNumber.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-fill: rgba(255,0,166,0.68)");
+
             Label recipeCategory = new Label(String.valueOf(recipePOJO.getRecipeCategory()));
             recipeCategory.setPrefSize(80, 40);
+            recipeCategory.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-fill: rgba(255,0,166,0.68)");
+
             tempBox.getChildren().addAll(recipeId, recipeName, serveNumber, recipeCategory);
             tempBox.setOnMouseEntered(e -> tempBox.setStyle("-fx-background-color: rgba(0,208,255,0.5)"));
             tempBox.setOnMouseExited(e -> tempBox.setStyle("-fx-background-color: rgba(255,255,255,0)"));
@@ -680,7 +690,17 @@ public final class Model implements ModelMethod {
 
     //RecipeId生成器
     private int recipeIdGenerator(){
-        return recipeNumber++;
+        StringBuilder str = new StringBuilder();
+        Random random = new Random();
+        for(int i = 0; i < 4; i++){
+            str.append(random.nextInt(10));
+        }
+        int tempId = Integer.parseInt(str.toString());
+        if(dataAccess.getRecipe_Id(tempId).isEmpty()){
+            return tempId;
+        }else{
+            return userIdGenerator();
+        }
     }
 
     //IngredientId生成器
