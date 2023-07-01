@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mappers.UserMapper">
+    <insert id="addUser" parameterType="UserPOJO">
+        insert into user_table
+        values (#{user.userId}, #{user.userName}, #{user.password})
+    </insert>
+
+    <delete id="deleteUser" parameterType="UserPOJO">
+        delete from user_table
+        where userId = #{user.userId}
+    </delete>
+
+    <update id="updateUser" parameterType="UserPOJO">
+        udpate user_table
+        set userName = #{user.userName}, password = #{user.password}
+        where userId = #{user.userId}
+    </update>
+
+    <select id="getUserById" parameterType="int" resultType="UserPOJO">
+        select *
+        from user_table
+        where userId = #{id}
+    </select>
+
+    <select id="getUserByName" parameterType="string" resultType="UserPOJO">
+        select *
+        from user_table
+        where userName = #{name}
+    </select>
+</mapper>

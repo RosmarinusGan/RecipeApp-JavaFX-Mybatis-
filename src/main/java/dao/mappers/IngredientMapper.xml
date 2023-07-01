@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mappers.IngredientMapper">
+    <insert id="addIngredient" parameterType="IngredientPOJO">
+        insert into ingredient_table
+        values (#{ingredient.ingredientId}, #{ingredient.recipeId}, #{ingredient.ingredientName}, #{ingredient.quantity}, #{ingredient.unit}, #{ingredient.description})
+    </insert>
+
+    <delete id="deleteIngredient" parameterType="IngredientPOJO">
+        delete from ingredient_table
+        where ingredientId = #{ingredient.ingredientId}
+    </delete>
+
+    <update id="updateIngredient" parameterType="IngredientPOJO">
+        update ingredient_table
+        set recipeId = #{ingredient.recipeId}, ingredientName = #{ingredient.ingredientName}, quantity = #{ingredient.quantity}, unit = #{ingredient.unit}, description = #{ingredient.description}
+        where ingredientId = #{ingredient.ingredientId}
+    </update>
+
+    <select id="getIngredient_recipe" parameterType="int" resultType="IngredientPOJO">
+        select *
+        from ingredient_table
+        where recipeId = #{recipeId}
+    </select>
+
+</mapper>

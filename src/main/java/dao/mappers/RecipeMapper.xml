@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mappers.RecipeMapper">
+    <resultMap id="RecipeMap" type="RecipePOJO">
+        <id column="recipeId" property="recipeId"/>
+        <result column="recipeName" property="recipeName"/>
+        <result column="recipeCategory" property="recipeCategory"/>
+        <result column="prepareTime" property="prepareTime"/>
+        <result column="cookTime" property="cookTime"/>
+        <result column="recommendServeNumber" property="recommendServeNumber"/>
+        <result column="ownerId" property="ownerId"/>
+        <result column="instruction" property="instruction"/>
+        <result column="imagePath" property="imagePath"/>
+        <association property="ingredients" column="recipeId" select="dao.mappers.IngredientMapper.getIngredient_recipe"/>
+    </resultMap>
+
+    <insert id="addRecipe" parameterType="RecipePOJO">
+        insert into recipe_table
+        values (#{recipe.recipeId}, #{recipe.recipeName}, #{recipe.recipeCategory}, #{recipe.prepareTime}, #{recipe.cookTime}, #{recipe.recommendServeNumber}, #{recipe.ownerId}, #{recipe.instruction}, #{recipe.imagePath})
+    </insert>
+
+    <delete id="deleteRecipe" parameterType="RecipePOJO">
+        delete from recipe_table
+        where recipeId = #{recipe.recipeId}
+    </delete>
+
+    <update id="updateRecipe" parameterType="RecipePOJO">
+        update recipe_table
+        set recipeName = #{recipe.recipeName}, recipeCategory = #{recipe.recipeCategory}, prepareTime = #{recipe.prepareTime}, cookTime = #{recipe.cookTime}, recommendServeNumber = #{recipe.recommendServeNumber}, ownerId = #{recipe.ownerId}, instruction = #{recipe.instruction}, imagePath = #{recipe.imagePath}
+        where recipeId = #{recipe.recipeId}
+    </update>
+
+    <select id="getRecipeByOwner" parameterType="int" resultMap="RecipeMap">
+        select *
+        from recipe_table
+        where ownerId = #{owner}
+    </select>
+
+    <select id="getRecipeByName" parameterType="string" resultMap="RecipeMap">
+        select *
+        from recipe_table
+        where recipeName LIKE concat("%", #{name}, "%");
+    </select>
+
+    <select id="getRecipeByCategory" parameterType="string" resultMap="RecipeMap">
+        select *
+        from recipe_table
+        where recipeCategory = #{category}
+    </select>
+
+    <select id="getRecipeById" parameterType="int" resultMap="RecipeMap">
+        select *
+        from recipe_table
+        where recipeId = #{id}
+    </select>
+    
+   <select id="getRecipeByCategoryAndName" resultMap="RecipeMap">
+       select *
+       from (select *
+             from recipe_table
+             where recipeCategory = #{category}
+             )as sub_table
+       where recipeName LIKE concat("%", #{name}, "%");
+   </select>
+
+    <select id="getRecipeAll" resultMap="RecipeMap">
+        select *
+        from recipe_table
+    </select>
+</mapper>
