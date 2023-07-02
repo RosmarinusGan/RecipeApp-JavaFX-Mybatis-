@@ -7,6 +7,7 @@ import dao.mappers.RecipePOJO;
 import dao.mappers.UserPOJO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -141,13 +142,13 @@ public final class Model implements ModelMethod {
     public void updateIngredient(TableView<IngredientPOJO> tableView, int number){
         for(IngredientPOJO e : tableView.getItems()){
             float temp = e.getQuantity() * ((float)number / currentOperateRecipe.getRecommendServeNumber()); //不能向下取整
-            temp = Float.parseFloat(String.format("%.5f", temp));
+            temp = Float.parseFloat(String.format("%.2f", temp));
             e.setQuantity(temp);
         }
 
         for(int i = 0; i < tableView.getItems().size(); i++){
             float temp = currentOperateRecipe.getIngredients().get(i).getQuantity() *  ((float)number / currentOperateRecipe.getRecommendServeNumber());
-            temp = Float.parseFloat(String.format("%.5f", temp));
+            temp = Float.parseFloat(String.format("%.2f", temp));
             tableView.getItems().get(i).setQuantity(temp);
         }
     }
@@ -181,12 +182,15 @@ public final class Model implements ModelMethod {
             ImageView imageView = new ImageView(imageRetrieve(list.get(i).getRecipeId()));
             imageView.setFitHeight(150);
             imageView.setFitWidth(150);
+
             Label recipeId = new Label(String.valueOf(list.get(i).getRecipeId()));
             recipeId.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; -fx-text-alignment: center");
             recipeId.setPrefSize(70, 30);
+
             Label recipeName = new Label(list.get(i).getRecipeName());
             recipeName.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 16px; ; -fx-text-alignment: center");
-            recipeName.setPrefSize(70, 30);
+            recipeName.setPrefSize(140, 30);
+
             box.getChildren().addAll(imageView, recipeId, recipeName);
             box.setOnMouseEntered(e -> box.setStyle("-fx-background-color: rgba(238,255,0,0.62)"));
             box.setOnMouseExited(e -> box.setStyle("-fx-background-color: rgba(255,255,255,0)"));

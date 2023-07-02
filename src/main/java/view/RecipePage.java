@@ -202,7 +202,6 @@ public class RecipePage extends Stage{
         prepareTimeTextField.setLayoutX(527);
         prepareTimeTextField.setLayoutY(74);
         prepareTimeTextField.setPrefSize(157, 30);
-     //   prepareTimeTextField.setPromptText("1 hour");
         prepareTimeTextField.setAlignment(Pos.CENTER);
         prepareTimeTextField.setEditable(false);
 
@@ -233,7 +232,7 @@ public class RecipePage extends Stage{
         recipeNameTextField.setPrefSize(385, 46);
         recipeNameTextField.setAlignment(Pos.CENTER);
         recipeNameTextField.setEditable(false);
-        recipeNameTextField.setFont(new Font(21));
+        recipeNameTextField.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 21px");
 
         recipeNameLabel = new Label("Recipe Name:");
         recipeNameLabel.setLayoutX(64);

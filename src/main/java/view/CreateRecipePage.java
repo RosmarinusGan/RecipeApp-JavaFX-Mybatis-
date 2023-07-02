@@ -224,9 +224,8 @@ public class CreateRecipePage extends Stage{
         recipeNameField.setLayoutY(14.0);
         recipeNameField.setPrefHeight(45.0);
         recipeNameField.setPrefWidth(350.0);
-        Font textFieldFont = new Font(21.0);
-        recipeNameField.setFont(textFieldFont);
         recipeNameField.setTextFormatter(model.textFieldFormatter(30, false, false));
+        recipeNameField.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 21px");
     }
 
     private void setIngredientsField() {

@@ -1,6 +1,8 @@
 package view;
 
 import control.SearchResultPageController;
+import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -8,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.CATEGORY;
 import model.Model;
@@ -26,8 +29,16 @@ public class SearchResultPage extends Stage{
     private final SearchResultPageController controller = new SearchResultPageController(this, model);
 
     public SearchResultPage() {
+        StackPane tempPane = new StackPane();
         box = new VBox();
-        resultPane = new ScrollPane(box);
+        Text tempText = new Text("Not Found Recipe");
+        tempText.setStyle("-fx-font-family: Forte; -fx-font-size: 25px; -fx-alignment: Center;");
+        tempPane.getChildren().addAll(tempText, box);
+        resultPane = new ScrollPane(tempPane);
+        box.getChildren().addListener((ListChangeListener<? super Node>) change -> {
+            tempText.setOpacity(box.getChildren().isEmpty() ? 1 : 0);
+        });
+
 
         AnchorPane root = new AnchorPane();
         root.setPrefSize(773, 507);
