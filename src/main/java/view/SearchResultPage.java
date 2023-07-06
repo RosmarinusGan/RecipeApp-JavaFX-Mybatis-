@@ -15,12 +15,35 @@ import javafx.stage.Stage;
 import model.CATEGORY;
 import model.Model;
 
+/**
+ * The type Search result page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class SearchResultPage extends Stage{
+    /**
+     * The Search field.
+     */
     public TextField searchField;
+    /**
+     * The Search button.
+     */
     public Button searchButton;
+    /**
+     * The Search Result pane.
+     */
     public ScrollPane resultPane;
+    /**
+     * The Box displays the rows of search results.
+     */
     public VBox box;
+    /**
+     * The Toggle group of category.
+     */
     public ToggleGroup toggleGroup;
+    /**
+     * The Grid pane displays the group of category.
+     */
     public GridPane gridPane;
     private HBox resultLabelBox;
     private AnchorPane innerAnchorPane;
@@ -28,6 +51,9 @@ public class SearchResultPage extends Stage{
     private final Model model = Model.getInstance();
     private final SearchResultPageController controller = new SearchResultPageController(this, model);
 
+    /**
+     * Instantiates a new Search result page.
+     */
     public SearchResultPage() {
         StackPane tempPane = new StackPane();
         box = new VBox();

@@ -7,14 +7,22 @@ import javafx.stage.WindowEvent;
 import model.Model;
 import view.SignupPage;
 
+/**
+ * The type Signup page controller is to control the signup page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class SignupPageController implements EventHandler<ActionEvent> {
+    /**
+     * Instantiates a new Signup page controller.
+     *
+     * @param _signupPage the signup page
+     * @param _model      the model
+     */
     public SignupPageController(SignupPage _signupPage, Model _model){
         signupPage = _signupPage;
         model = _model;
     }
-
-    private final SignupPage signupPage;
-    private final Model model;
 
     @Override
     public void handle(ActionEvent actionEvent) {
@@ -35,4 +43,7 @@ public class SignupPageController implements EventHandler<ActionEvent> {
             signupPage.newPasswordTextField.clear();
         }
     }
+
+    private final SignupPage signupPage;
+    private final Model model;
 }

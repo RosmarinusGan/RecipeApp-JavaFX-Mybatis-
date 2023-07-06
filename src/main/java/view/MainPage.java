@@ -14,17 +14,50 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Model;
 
+/**
+ * The type Main page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class MainPage extends Stage{
-    public ImageView imageView;
-    public AnchorPane innerAnchorPane, anchorPane;
-    public Button createRecipeButton, nextPageButton, previousPageButton;
+    /**
+     * The Create recipe button.
+     */
+    public Button createRecipeButton, /**
+     * The Next page button.
+     */
+    nextPageButton, /**
+     * The Previous page button.
+     */
+    previousPageButton;
+    /**
+     * The Overlay of search text field.
+     */
     public Pane overlaySearchTextField;
+    /**
+     * The User recipes pane.
+     */
     public GridPane userRecipesPane;
-    public Label mainPageLabel, slashLabel;
-    public Text pageNumber, totalPageNumber;
+    /**
+     * The Current Page number.
+     */
+    public Text pageNumber, /**
+     * The Total page number.
+     */
+    totalPageNumber;
+    /**
+     * The Main page label.
+     */
+    public Label mainPageLabel;
+    private ImageView imageView;
+    private AnchorPane innerAnchorPane;
+    private Label slashLabel;
     private final Model model = Model.getInstance();
     private final MainPageController mainPageController = new MainPageController(this, model);
 
+    /**
+     * Update user recipe pane.
+     */
     public void updateUserRecipePane(){
         model.updateMainPage(userRecipesPane, Integer.parseInt(pageNumber.getText()));
     }
@@ -36,8 +69,11 @@ public class MainPage extends Stage{
         overlaySearchTextField.setOnMouseClicked(mainPageController);
     }
 
+    /**
+     * Instantiates a new Main page.
+     */
     public MainPage() {
-        anchorPane = new AnchorPane();
+        AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(507.0);
         anchorPane.setPrefWidth(773.0);
 

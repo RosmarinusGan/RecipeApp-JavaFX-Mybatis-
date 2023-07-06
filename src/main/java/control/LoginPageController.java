@@ -6,13 +6,23 @@ import model.Model;
 import view.LoginPage;
 import view.SignupPage;
 
+/**
+ * The type Login page controller is to control the login page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class LoginPageController implements EventHandler<ActionEvent> {
-    private final LoginPage loginPage;
-    private final Model model;
+    /**
+     * Instantiates a new Login page controller.
+     *
+     * @param _loginPage the login page
+     * @param _model     the model
+     */
     public LoginPageController(LoginPage _loginPage, Model _model){
         loginPage = _loginPage;
         model = _model;
     }
+
     @Override
     public void handle(ActionEvent actionEvent) {
         if(actionEvent.getSource() == loginPage.signupButton){
@@ -49,4 +59,7 @@ public class LoginPageController implements EventHandler<ActionEvent> {
             loginPage.close();
         }
     }
+
+    private final LoginPage loginPage;
+    private final Model model;
 }

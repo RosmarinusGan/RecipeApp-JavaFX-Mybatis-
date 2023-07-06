@@ -14,11 +14,49 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Model;
 
+/**
+ * The type Recipe page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class RecipePage extends Stage{
-    public Button editRecipeButton, deleteRecipeButton;
-    public TextField recipeNameTextField, cookingTimeTextField, prepareTimeTextField, serveNumberTextField, categoryDisplayField, ownerTextField;
+    /**
+     * The Edit recipe button.
+     */
+    public Button editRecipeButton, /**
+     * The Delete recipe button.
+     */
+    deleteRecipeButton;
+    /**
+     * The Recipe name text field.
+     */
+    public TextField recipeNameTextField, /**
+     * The Cooking time text field.
+     */
+    cookingTimeTextField, /**
+     * The Prepare time text field.
+     */
+    prepareTimeTextField, /**
+     * The Serve number text field.
+     */
+    serveNumberTextField, /**
+     * The Category display field.
+     */
+    categoryDisplayField, /**
+     * The Owner text field.
+     */
+    ownerTextField;
+    /**
+     * The Table view of ingredients.
+     */
     public TableView<IngredientPOJO> tableView;
+    /**
+     * The Recipe picture.
+     */
     public ImageView recipePicture;
+    /**
+     * The Instruction area.
+     */
     public TextArea InstructionArea;
     private Tab basicInfoTab, cookingInstructionTab;
     private Label recipeNameLabel, cookingTimeLabel, prepareTimeLabel, serveNumberLabel, categoryLabel, ownerLabel;
@@ -28,16 +66,37 @@ public class RecipePage extends Stage{
     private void addListener(){
         editRecipeButton.setOnAction(controller);
         deleteRecipeButton.setOnAction(controller);
-        serveNumberTextField.textProperty().addListener(e -> update());
+        serveNumberTextField.textProperty().addListener(e -> {
+            try {
+                update();
+            }catch (Exception exception){
+
+            }
+        });
     }
 
+    /**
+     * Update the quantity of ingredient when serve number changes.
+     */
     public void update(){
         if(!serveNumberTextField.getText().isEmpty()) {
-            model.updateIngredient(tableView, Integer.parseInt(serveNumberTextField.getText()));
-            tableView.refresh();
+            try{
+                int temp = Integer.parseInt(serveNumberTextField.getText());
+                model.updateIngredient(tableView, temp);
+                tableView.refresh();
+            } catch (NumberFormatException e) {
+                model.alertDisplay(Alert.AlertType.WARNING, "number is too big !");
+            }
+        } else{
+            model.alertDisplay(Alert.AlertType.WARNING, "Serve Number can't be empty!");
+            serveNumberTextField.setText("0");
+            model.updateIngredient(tableView, 0);
         }
     }
 
+    /**
+     * Instantiates a new Recipe page.
+     */
     public RecipePage() {
         model = Model.getInstance();
         controller = new RecipePageController(this, model);
@@ -90,6 +149,7 @@ public class RecipePage extends Stage{
         textField.setStyle("-fx-background-color: #FF88; -fx-background-radius: 10;");
         textField.setText("Please Follow The Instructions Below:");
         textField.setEffect(new DropShadow());
+        textField.setEditable(false);
 
         cookingInstructionContent.getChildren().addAll(innerAnchorPane, textField);
 
@@ -194,7 +254,7 @@ public class RecipePage extends Stage{
         serveNumberTextField.setLayoutY(74);
         serveNumberTextField.setPrefSize(84, 30);
         serveNumberTextField.setAlignment(Pos.CENTER);
-        serveNumberTextField.setTextFormatter(model.textFieldFormatter(10, true, false));
+        serveNumberTextField.setTextFormatter(model.textFieldFormatter(9, true, false));
     }
 
     private void displayPrepareTime() {

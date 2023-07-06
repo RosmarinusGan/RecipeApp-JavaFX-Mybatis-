@@ -5,7 +5,18 @@ import javafx.event.EventHandler;
 import model.Model;
 import view.CreateRecipePage;
 
+/**
+ * The type Edit page controller is to control the edit page.
+ *
+ * @author Liming Gan
+ */
 public class EditPageController implements EventHandler<ActionEvent> {
+    /**
+     * Instantiates a new Edit page controller.
+     *
+     * @param _page  the create recipe page
+     * @param _model the model
+     */
     public EditPageController(CreateRecipePage _page, Model _model){
         page = _page;
         model = _model;

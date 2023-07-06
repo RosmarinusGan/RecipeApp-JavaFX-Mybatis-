@@ -15,13 +15,57 @@ import javafx.stage.Stage;
 import model.CATEGORY;
 import model.Model;
 
+/**
+ * The type Create recipe page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class CreateRecipePage extends Stage{
-    public Button uploadButton, saveButton, addText, deleteText;
-    public TextField recipeNameField, serveNumberTextField, prepareTimeTextField, cookingTimeTextField;
+    /**
+     * The Upload Image button.
+     */
+    public Button uploadButton, /**
+     * The Save button.
+     */
+    saveButton, /**
+     * The Add ingredient text button.
+     */
+    addText, /**
+     * The Delete ingredient text button.
+     */
+    deleteText;
+    /**
+     * The Recipe name field.
+     */
+    public TextField recipeNameField, /**
+     * The Serve number text field.
+     */
+    serveNumberTextField, /**
+     * The Prepare time text field.
+     */
+    prepareTimeTextField, /**
+     * The Cooking time text field.
+     */
+    cookingTimeTextField;
+    /**
+     * The Instruction text field.
+     */
     public TextArea instructionTextField;
+    /**
+     * The Toggle group of category.
+     */
     public ToggleGroup toggleGroup;
+    /**
+     * The Scroll box of ingredient text fields.
+     */
     public VBox scrollBox;
+    /**
+     * The Tab pane of basic info and instruction.
+     */
     public TabPane tabPane;
+    /**
+     * The Recipe picture.
+     */
     public ImageView recipePicture;
     private GridPane categoryPane;
     private ScrollPane scrollPane;
@@ -30,17 +74,18 @@ public class CreateRecipePage extends Stage{
     private final Model model = Model.getInstance();
     private final CreateRecipePageController controller = new CreateRecipePageController(this, model);
 
-    private void addListener(){
-        saveButton.setOnAction(controller);
-        uploadButton.setOnAction(controller);
-        addText.setOnAction(controller);
-        deleteText.setOnAction(controller);
-    }
-
+    /**
+     * Update image.
+     *
+     * @param path the path of image
+     */
     public void updateImage(String path){
         recipePicture.setImage(new Image("file:" + "image/_" + path));
     }
 
+    /**
+     * Instantiates a new Create recipe page.
+     */
     public CreateRecipePage( ) {
         tabPane = new TabPane();
         tabPane.setPrefSize(773, 507);
@@ -55,6 +100,13 @@ public class CreateRecipePage extends Stage{
         this.setScene(scene);
         this.setTitle("Create Your Recipe");
         this.setResizable(false);
+    }
+
+    private void addListener(){
+        saveButton.setOnAction(controller);
+        uploadButton.setOnAction(controller);
+        addText.setOnAction(controller);
+        deleteText.setOnAction(controller);
     }
 
     private void setCookInstructionTab(TabPane tabPane) {
@@ -209,7 +261,7 @@ public class CreateRecipePage extends Stage{
         serveNumberTextField.setLayoutY(131.0);
         serveNumberTextField.setPrefHeight(30.0);
         serveNumberTextField.setPrefWidth(84.0);
-        serveNumberTextField.setTextFormatter(model.textFieldFormatter(10, true, false));
+        serveNumberTextField.setTextFormatter(model.textFieldFormatter(9, true, false));
     }
 
     private void setRecipeName() {

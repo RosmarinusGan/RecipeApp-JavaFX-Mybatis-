@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * The type Data access is to manager the data access.
+ *
+ * @author Liming Gan
+ */
 public class DataAccess implements DataMethod{
     //Singleton
     private DataAccess(){
@@ -18,6 +23,12 @@ public class DataAccess implements DataMethod{
     private static class SingletonInstance{
         private static final DataAccess singleton = new DataAccess();
     }
+
+    /**
+     * Get the instance of data access.
+     *
+     * @return the data access instance
+     */
     public static DataAccess getInstance(){
         return SingletonInstance.singleton;
     }

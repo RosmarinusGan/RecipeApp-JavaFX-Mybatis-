@@ -11,12 +11,35 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Model;
 
+/**
+ * The type Login page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class LoginPage extends Stage{
-
+    /**
+     * The Login button.
+     */
+    public Button loginButton;
+    /**
+     * The Signup button.
+     */
+    public Button signupButton;
+    /**
+     * The Username field.
+     */
+    public TextField usernameField;
+    /**
+     * The Password field.
+     */
+    public PasswordField passwordField;
+    private ImageView imageView;
     private final LoginPageController loginPageController;
     private final Model model;
 
-
+    /**
+     * Instantiates a new Login page.
+     */
     public LoginPage(){
         model = Model.getInstance();
         loginPageController = new LoginPageController(this, model);
@@ -113,7 +136,7 @@ public class LoginPage extends Stage{
         innerAnchorPane.setPrefWidth(397.0);
         innerAnchorPane.setStyle("-fx-background-color: WHITE; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-        dropShadow = new DropShadow();
+        DropShadow dropShadow = new DropShadow();
         dropShadow.setHeight(45.0);
         dropShadow.setRadius(22.0);
         dropShadow.setWidth(45.0);
@@ -133,11 +156,4 @@ public class LoginPage extends Stage{
         loginButton.setOnAction(loginPageController);
         signupButton.setOnAction(loginPageController);
     }
-
-    public Button loginButton;
-    public Button signupButton;
-    public TextField usernameField;
-    public PasswordField passwordField;
-    public ImageView imageView;
-    public static DropShadow dropShadow;
 }

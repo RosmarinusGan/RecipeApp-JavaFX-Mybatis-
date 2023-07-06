@@ -7,14 +7,22 @@ import view.CreateRecipePage;
 import view.MainPage;
 import view.SearchResultPage;
 
+/**
+ * The type Main page controller is to control the main page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class MainPageController implements EventHandler<MouseEvent> {
+    /**
+     * Instantiates a new Main page controller.
+     *
+     * @param _mainPage the main page
+     * @param _model    the model
+     */
     public MainPageController(MainPage _mainPage, Model _model){
         mainPage = _mainPage;
         model = _model;
     }
-
-    private final MainPage mainPage;
-    private final Model model;
 
     @Override
     public void handle(MouseEvent mouseEvent) {
@@ -43,4 +51,6 @@ public class MainPageController implements EventHandler<MouseEvent> {
             mainPage.updateUserRecipePane();
         }
     }
+    private final MainPage mainPage;
+    private final Model model;
 }

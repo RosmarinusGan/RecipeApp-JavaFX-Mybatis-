@@ -10,7 +10,18 @@ import model.Model;
 import view.CreateRecipePage;
 import view.RecipePage;
 
+/**
+ * The type Recipe page controller is to control the recipe page.
+ *
+ * @author Liming Gan
+ */
 public class RecipePageController implements EventHandler<ActionEvent> {
+    /**
+     * Instantiates a new Recipe page controller.
+     *
+     * @param _recipePage the recipe page
+     * @param _model      the model
+     */
     public RecipePageController(RecipePage _recipePage, Model _model){
         recipePage = _recipePage;
         model = _model;
@@ -35,8 +46,8 @@ public class RecipePageController implements EventHandler<ActionEvent> {
         }
     }
 
-    private RecipePage recipePage;
-    private Model model;
+    private final RecipePage recipePage;
+    private final Model model;
 
 
 

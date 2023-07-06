@@ -12,11 +12,33 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Model;
 
+/**
+ * The type Signup page.
+ *
+ * @author Zhongyu Zhou
+ */
 public class SignupPage extends Stage{
-
+    /**
+     * The Image view.
+     */
+    public ImageView imageView;
+    /**
+     * The New user name text field.
+     */
+    public TextField newUserNameTextField, /**
+     * The New password text field.
+     */
+    newPasswordTextField;
+    /**
+     * The Save the account button.
+     */
+    public Button saveAccountButton;
     private final SignupPageController loginPageController;
     private final Model model;
 
+    /**
+     * Instantiates a new Signup page.
+     */
     public SignupPage() {
         model = Model.getInstance();
         loginPageController = new SignupPageController(this, model);
@@ -117,9 +139,5 @@ public class SignupPage extends Stage{
     private void addListener(){
         saveAccountButton.setOnAction(loginPageController);
     }
-
-    public ImageView imageView;
-    public TextField newUserNameTextField, newPasswordTextField;
-    public Button saveAccountButton;
 }
 

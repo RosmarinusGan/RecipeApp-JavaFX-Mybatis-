@@ -7,14 +7,22 @@ import javafx.scene.layout.HBox;
 import model.Model;
 import view.CreateRecipePage;
 
+/**
+ * The type Create recipe page controller is to control the recipe page.
+ *
+ * @author Liming Gan
+ */
 public class CreateRecipePageController implements EventHandler<ActionEvent> {
+    /**
+     * Instantiates a new Create recipe page controller.
+     *
+     * @param _createRecipePage the create recipe page
+     * @param _model            the model
+     */
     public CreateRecipePageController(CreateRecipePage _createRecipePage, Model _model){
         createRecipePage = _createRecipePage;
         model = _model;
     }
-
-    private final CreateRecipePage createRecipePage;
-    private final Model model;
 
     @Override
     public void handle(ActionEvent actionEvent) {
@@ -64,4 +72,7 @@ public class CreateRecipePageController implements EventHandler<ActionEvent> {
             createRecipePage.scrollBox.getChildren().remove(temp);
         }
     }
+
+    private final CreateRecipePage createRecipePage;
+    private final Model model;
 }

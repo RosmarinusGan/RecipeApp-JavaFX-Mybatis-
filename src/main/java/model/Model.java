@@ -7,7 +7,6 @@ import dao.mappers.RecipePOJO;
 import dao.mappers.UserPOJO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +26,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ * The type Model.
+ *
+ * @author Liming Gan
+ */
 public final class Model implements ModelMethod {
     //Singleton
     private Model(){
@@ -35,6 +39,12 @@ public final class Model implements ModelMethod {
     private static class SingletonInstance{
         private static final Model singleton = new Model();
     }
+
+    /**
+     * Get instance model.
+     *
+     * @return the model instance
+     */
     public static Model getInstance(){
         return SingletonInstance.singleton;
     }
@@ -53,7 +63,7 @@ public final class Model implements ModelMethod {
         page.recipePicture.setImage(new Image("file:" + defaultImagePath + "_" + currentOperateRecipe.getImagePath()));
         page.editRecipeButton.setVisible(currentOperateRecipe.getOwnerId() == currentUser.getUserId()); //设置edit按钮对非owner不可见
         page.deleteRecipeButton.setVisible(currentOperateRecipe.getOwnerId() == currentUser.getUserId()); //设置delete按钮对非owner不可见
-
+        page.InstructionArea.setEditable(false);
         ObservableList<IngredientPOJO> data = FXCollections.observableArrayList();
         if(currentOperateRecipe.getIngredients() == null){
             page.show();
@@ -83,12 +93,6 @@ public final class Model implements ModelMethod {
         //改变监听事件
         createRecipePage.saveButton.setOnAction(new EditPageController(createRecipePage, this));
         createRecipePage.uploadButton.setOnAction(new EditPageController(createRecipePage, this));
-        /*recipePage.setOpacity(0);//似乎不能设置其close（）或者hide（）
-        createRecipePage.show();
-        RecipePage tempPage = new RecipePage();
-        tempPage.setOnCloseRequest(e -> recipePage.fireEvent(new WindowEvent(recipePage, WindowEvent.WINDOW_CLOSE_REQUEST)));
-
-         */
         createRecipePage.show();
         createRecipePage.setOnCloseRequest(e -> loadRecipePage(recipePage, currentOperateRecipe.getRecipeId()));
 
@@ -565,7 +569,6 @@ public final class Model implements ModelMethod {
     //删除一个Recipe
     @Override
     public boolean deleteRecipe() {
-        imageDelete();
         return dataAccess.deleteRecipe(currentOperateRecipe);
     }
 
@@ -585,19 +588,6 @@ public final class Model implements ModelMethod {
         tempPojo.setImagePath(imagePath);
         deleteRecipe(); //删除当前recipe
         return dataAccess.insertRecipe(tempPojo);
-    }
-
-    //删除一个User
-    @Override
-    public boolean deleteUser() {
-        return dataAccess.deleteUser(currentUser);
-    }
-
-    //更新一个User
-    @Override
-    public boolean updateUser(String userName) {
-        List<UserPOJO> tempList = dataAccess.getUser(userName);
-        return dataAccess.updateUser(tempList.get(0));
     }
 
     @Override
@@ -739,7 +729,6 @@ public final class Model implements ModelMethod {
     private RecipePOJO currentOperateRecipe;
     private UserPOJO currentUser;
     private String defaultImagePath;
-    private int recipeNumber = 1;
     private String currentImagePath = null;
 
 }
